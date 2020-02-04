@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Son Tung MTP | KHÓA HỌC NODEJS TẠI KHOAPHAM.VN</title>
+<title>Son Tung MTP </title>
 <meta name="description" content="Sản phẩm demo nằm trong KHÓA HỌC LẬP TRÌNH NODEJS tại Khoa Phạm | KhoaPham.Vn" />
 <meta name="fragment" content="!">
 <meta name='robots' content='index,follow' />
@@ -52,17 +52,17 @@ var bgStretch = true;
 	</div>
 
 	<ul id="bgImages">
-
-		<li>
-			<img class="thumb" src="images/logoSmall/1.jpg" alt="" />
-			<iframe src="http://player.vimeo.com/video/184293723?api=1&amp;title=0&amp;byline=0&amp;portrait=0" videotype="vimeo" width="400" height="225" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
-			<h3>Chúng ta không thuộc về nhau</h3>
-			<p>Niềm tin đã mất, giọt nước mắt cuốn kí ức anh chìm sâu. Tìm về nơi đâu, cô đơn đôi chân lạc trôi giữa bầu trời </p>
-		</li>
-
-	
-
-
+		<% 
+			results.forEach(function (item){ %>
+				<li>
+					<img class="thumb" src="images/logoSmall/<%= item.image %>" alt="" />
+					<iframe src="http://player.vimeo.com/video/<%= item.code %>?api=1&amp;title=0&amp;byline=0&amp;portrait=0" videotype="vimeo" width="400" height="225" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+					<h3><%= item.title %></h3>
+					<p><%= item.description %> </p>
+				</li>
+		<%	});	
+		%> 
+		
 	</ul>
 
 	<div id="menu-container">

@@ -27,14 +27,26 @@ connection.connect(function (error) {
 
 
 app.get('/', function (req, res) {
-    connection.query('SELECT * FROM video', function (error, rows, fields) {
-        if (!!error) {
-            console.log("Error in query");
+    connection.query('SELECT * FROM video', function (error, results, fields) {
+        if (error) {
+            throw error;
         }
-        else {
-            console.log("successful query");
-            console.log(rows);
-        }  
+        res.render("home",{results});
       });
-    res.render("home");
+    
+});
+app.get('/video/list', function (req, res) {
+    connection.query('SELECT * FROM video', function (error, results, fields) {
+        if (error) {
+            throw error;
+        }  
+        res.render("list",{results});
+      });
+    
+});
+app.get('/delete/:id', function (req, res) {
+    connection.query("delete from video where id = " + req.params.id, function (error, results, fields) {
+        res.redirect('/video/list');
+      });
+    // res.send(req.params.id);
 })
