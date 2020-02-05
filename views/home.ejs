@@ -55,7 +55,7 @@ var bgStretch = true;
 		<% 
 			results.forEach(function (item){ %>
 				<li>
-					<img class="thumb" src="images/logoSmall/<%= item.image %>" alt="" />
+					<img class="thumb" src="/uploads/<%= item.image %>" alt="" />
 					<iframe src="http://player.vimeo.com/video/<%= item.code %>?api=1&amp;title=0&amp;byline=0&amp;portrait=0" videotype="vimeo" width="400" height="225" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
 					<h3><%= item.title %></h3>
 					<p><%= item.description %> </p>
@@ -89,7 +89,7 @@ var bgStretch = true;
 	</div>
 
 	<div id="footer">
-		<div id="footertext"> Website xây dựng bằng <a href="http://khoapham.vn/khoa-hoc-lap-trinh-nodejs.html" target="_blank">NodeJS + PostGreSQL</a></div>
+		
 
 		<div id="bgControl">
 			<a class="prev" href="javascript:void(0);" onclick="prevBg()"></a>

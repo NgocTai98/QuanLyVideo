@@ -6,6 +6,19 @@ app.set("views","./views");
 app.listen(3000);
 
 var mysql = require('mysql');
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var multer  = require('multer');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/uploads')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+var upload = multer({ storage: storage }).single('image');
+
 
 
 var connection = mysql.createConnection({
@@ -30,8 +43,11 @@ app.get('/', function (req, res) {
     connection.query('SELECT * FROM video', function (error, results, fields) {
         if (error) {
             throw error;
+        }else
+        {
+            res.render("home",{results});
         }
-        res.render("home",{results});
+        
       });
     
 });
@@ -49,4 +65,37 @@ app.get('/delete/:id', function (req, res) {
         res.redirect('/video/list');
       });
     // res.send(req.params.id);
+});
+app.get('/video/add', function (req, res) {
+    res.render('add');
+});
+app.post('/video/add',urlencodedParser, function (req, res) {
+    upload(req, res, function (err) {
+        if (err ) {
+          res.send('errors');
+        } else {
+           var sql = "insert into video (title, description, code, image) values('"+req.body.title+"','"+req.body.description+"','"+req.body.code+"','"+req.file.originalname+"')";
+           connection.query(sql, function (error, results, fields) {
+               if (error) {
+                   res.send('error query')
+               } else {
+                res.redirect('./list');
+               }
+           
+          });
+        }
+    
+      })
+});
+app.get('/video/edit/:id', function (req, res) {
+    connection.query('SELECT * FROM video where id='+req.params.id , function (error, results, fields) {
+        if (error) {
+            throw error;
+        }else
+        {
+            res.render("edit",{results});
+        }  
+        
+        
+      });
 })

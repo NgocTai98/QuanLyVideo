@@ -8,7 +8,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/icon/css/fontawesome.min.css">
+  <link rel="stylesheet" href="/icon/css/all.css">
+  
 </head>
 <body>
 
@@ -20,7 +21,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr class="bg-success text-center">
-                        <td colspan="6">Thêm video</td>
+                        <td colspan="6"><a href="add">Thêm video</a></td>
                     </tr>
                     <tr class="bg-primary">
                         <th>ID</th>
@@ -38,8 +39,8 @@
                         <td><%= item.title %></td>
                         <td><%= item.description %></td>
                         <td><%= item.code %></td>
-                        <td><img src="/images/logoSmall/<%= item.image %>" alt="" style="width: 100px; height: 100px;"></td>
-                        <td><a href="edit/<%= item.id %>"><span class="fa fa-edit">Edit</span></a> - <a onclick="return del()" href="/delete/<%= item.id %>"><span class="fa fa-remove">Delete</span></a> </td>
+                        <td><img src="/uploads/<%= item.image %>" alt="" style="width: 100px; height: 100px;"></td>
+                        <td><a href="edit/<%= item.id %>"><span class="fa fa-edit"></span></a> - <a onclick="return del()" href="/delete/<%= item.id %>"><span class="far fa-trash-alt"></span></a> </td>
                     </tr>
                    <% }); %>
                 </tbody>
@@ -50,7 +51,7 @@
 </div>
 <script>
     function del() {
-        return confirm("bạn có chắc muốn xóa");
+        return confirm("bạn có chắc muốn xóa ");
     }
 </script>
 
