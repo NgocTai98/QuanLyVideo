@@ -98,4 +98,27 @@ app.get('/video/edit/:id', function (req, res) {
         
         
       });
+});
+app.post('/video/edit/:id', function (req, res) {
+    var id = req.params.id;
+    upload(req, res, function (err) {
+        if (err ) {
+          res.send('errors');
+        } else {
+           if (typeof(req.file)=='undefined') {
+               res.redirect('../list');              
+           } else {
+            var sql2 = "UPDATE video set title= '"+req.body.title+"',description= '"+req.body.description+"',code= '"+req.body.code+"',image= '"+req.file.originalname+"' where id ='"+id+"'";
+            connection.query(sql2, function (error, results, fields) {
+                if (error) {
+                    res.send('error query');
+                } else {
+                    res.redirect("../list")
+                }
+            
+           });
+           }
+        }
+    
+      })
 })
